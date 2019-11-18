@@ -1,0 +1,38 @@
+input array[185256][4] data
+count = 0, i1 = null, i2 = null
+startDate = '1.1.2018', endDate = '1.2.2018'
+array[31][2] arr
+for (i = 0; i < 185256)
+  if (startDate == data[i][0])
+    i1 = i
+  if (endDate == data[i][0])
+    i2 = i
+
+for (i = i1; i < i2; i+=499)
+  count++
+
+for (i = 0; i < 499; i++)
+  arr[i][0] = 0
+  arr[i][1] = 0
+
+k = 0;
+for (i = i1; i < i2; i++) 
+  arr[k][0] += data[i][1]
+  arr[k][1] += data[i][2]
+  k++;
+  if (k > 498) k = 0;
+
+for (i = 0; i < arr.length; i++)
+  arr[i][0] = el[0]/count
+  arr[i][1] = Math.abs(el[1]/count - 60)
+
+t = arr[0][0], h = arr[0][1]
+for (i = 0; i < arr.length; i++)
+  if (t < arr[i][0] && h > arr[i][1])
+    t = arr[i][0]
+    h = arr[i][1]
+
+index = 0
+for (i = 0; i < arr.length; i++)
+  if (arr[i][0] == t && arr[i][1] == h)
+    index = i;
